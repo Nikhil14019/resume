@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nikhil Rai - Resume</title>
+  <style>
+    /* ---------- CSS Variables ---------- */
+    :root {
+      /* Colors */
+      --primary: #0A84FF;
+      --primary-dark: #0071e3;
+      --secondary: #8E8E93;
+      --accent: #5856D6;
+      --success: #34C759;
+      --warning: #FF9500;
+      --error: #FF3B30;
+      --bg: #1C1C1E;
+      --text: #F2F2F7;
+      --card-bg: #2C2C2E;
+      --border: #38383A;
+      
+      /* Spacing (8px system) */
+      --space-1: 0.25rem;  /* 4px */
+      --space-2: 0.5rem;   /* 8px */
+      --space-3: 1rem;     /* 16px */
+      --space-4: 1.5rem;   /* 24px */
+      --space-5: 2rem;     /* 32px */
+      --space-6: 3rem;     /* 48px */
+      
+      /* Typography */
+      --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --line-height-body: 1.5;
+      --line-height-heading: 1.2;
+      
+      /* Other */
+      --border-radius: 12px;
+      --transition: all 0.3s ease;
+      --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    }
+    
+    /* ---------- Base Styles ---------- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    body {
+      font-family: var(--font-family);
+      line-height: var(--line-height-body);
+      background-color: var(--bg);
+      color: var(--text);
+      transition: var(--transition);
+      padding: var(--space-3);
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+      line-height: var(--line-height-heading);
+      margin-bottom: var(--space-3);
+      font-weight: 600;
+    }
+    
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: var(--space-2);
+    }
+    
+    h2 {
+      font-size: 1.75rem;
+      color: var(--primary);
+      position: relative;
+      padding-bottom: var(--space-2);
+    }
+    
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 3rem;
+      height: 3px;
+      background-color: var(--primary);
+      border-radius: 3px;
+    }
+    
+    h3 {
+      font-size: 1.25rem;
+      margin-bottom: var(--space-2);
+    }
+    
+    p {
+      margin-bottom: var(--space-3);
+    }
+    
+    a {
+      color: var(--primary);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+    
+    a:hover {
+      color: var(--primary-dark);
+      text-decoration: underline;
+    }
+    
+    ul {
+      list-style-position: inside;
+      margin-bottom: var(--space-3);
+    }
+    
+    li {
+      margin-bottom: var(--space-1);
+    }
+    
+    /* ---------- Layout ---------- */
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    
+    .resume {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-5);
+    }
+    
+    .card {
+      background-color: var(--card-bg);
+      border-radius: var(--border-radius);
+      padding: var(--space-4);
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      border: 1px solid var(--border);
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    }
+    
+    /* ---------- Components ---------- */
+    .header {
+      text-align: center;
+      margin-bottom: var(--space-5);
+    }
+    
+    .profile-img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: var(--space-3);
+      border: 3px solid var(--primary);
+    }
+    
+    .name {
+      font-size: 2.5rem;
+      margin-bottom: var(--space-1);
+    }
+    
+    .title {
+      color: var(--secondary);
+      font-size: 1.25rem;
+      margin-bottom: var(--space-3);
+    }
+    
+    .contact-info {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: var(--space-3);
+    }
+    
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-1);
+    }
+    
+    .contact-icon {
+      color: var(--primary);
+    }
+    
+    .section {
+      margin-bottom: var(--space-5);
+    }
+    
+    .education-item, .experience-item {
+      margin-bottom: var(--space-3);
+    }
+    
+    .timeline {
+      display: flex;
+      margin-bottom: var(--space-1);
+    }
+    
+    .timeline-dot {
+      width: 12px;
+      height: 12px;
+      background-color: var(--primary);
+      border-radius: 50%;
+      margin-right: var(--space-2);
+      margin-top: 6px;
+    }
+    
+    .date {
+      color: var(--secondary);
+      font-size: 0.9rem;
+    }
+    
+    .institution, .company {
+      font-weight: 600;
+    }
+    
+    .skills-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: var(--space-3);
+    }
+    
+    .skill-item {
+      margin-bottom: var(--space-2);
+    }
+    
+    .skill-name {
+      margin-bottom: var(--space-1);
+      display: flex;
+      justify-content: space-between;
+    }
+    
+    .skill-bar {
+      height: 8px;
+      background-color: var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    
+    .skill-progress {
+      height: 100%;
+      background-color: var(--primary);
+      border-radius: 4px;
+      width: 0;
+      transition: width 1s ease;
+    }
+    
+    .projects-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: var(--space-3);
+    }
+    
+    .project-card {
+      padding: var(--space-3);
+      border-radius: var(--border-radius);
+      border: 1px solid var(--border);
+      transition: var(--transition);
+    }
+    
+    .project-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow);
+    }
+    
+    .project-title {
+      font-size: 1.1rem;
+      margin-bottom: var(--space-1);
+    }
+    
+    .project-description {
+      font-size: 0.9rem;
+      color: var(--secondary);
+    }
+    
+    .interests {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+    }
+    
+    .interest-tag {
+      background-color: rgba(10, 132, 255, 0.1);
+      color: var(--primary);
+      padding: var(--space-1) var(--space-2);
+      border-radius: 20px;
+      font-size: 0.9rem;
+      transition: var(--transition);
+    }
+    
+    .interest-tag:hover {
+      background-color: var(--primary);
+      color: var(--text);
+    }
+    
+    .languages {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-3);
+    }
+    
+    .language-item {
+      text-align: center;
+    }
+    
+    .language-circle {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 3px solid var(--primary);
+      margin-bottom: var(--space-1);
+      position: relative;
+      font-weight: bold;
+    }
+    
+    .language-name {
+      font-size: 0.9rem;
+    }
+    
+    .print-btn {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      z-index: 100;
+      padding: var(--space-2) var(--space-3);
+      border-radius: 30px;
+      background-color: var(--primary);
+      color: var(--text);
+      border: none;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      font-weight: 600;
+      transition: var(--transition);
+    }
+    
+    .print-btn:hover {
+      transform: scale(1.05);
+      background-color: var(--primary-dark);
+    }
+    
+    /* ---------- Media Queries ---------- */
+    @media (max-width: 768px) {
+      .projects-container, .skills-container {
+        grid-template-columns: 1fr;
+      }
+      
+      .contact-info {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .card {
+        padding: var(--space-3);
+      }
+      
+      .language-circle {
+        width: 60px;
+        height: 60px;
+      }
+    }
+
+    @media print {
+      body {
+        padding: 0;
+      }
+      
+      .card {
+        box-shadow: none;
+        break-inside: avoid;
+        page-break-inside: avoid;
+        border: 1px solid var(--border);
+      }
+      
+      .card:hover {
+        transform: none;
+        box-shadow: none;
+      }
+      
+      .print-btn {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="resume">
+      <!-- Header Section -->
+      <header class="header card">
+        <img src="nikhil.png" alt="Nikhil Rai" class="profile-img">
+        <h1 class="name">Nikhil Rai</h1>
+        <p class="title">B.Tech CSE Student at South Asian University</p>
+        <div class="contact-info">
+          <div class="contact-item">
+            <i class="contact-icon">📍</i>
+            <span>New Delhi, India</span>
+          </div>
+          <div class="contact-item">
+            <i class="contact-icon">✉️</i>
+            <a href="mailto:nikhilrai@students.sau.ac.in">nikhilrai@students.sau.ac.in</a>
+          </div>
+          <div class="contact-item">
+            <i class="contact-icon">📞</i>
+            <span>+918420995711</span>
+          </div>
+          <div class="contact-item">
+            <i class="contact-icon">🔗</i>
+            <a href="https://www.linkedin.com/in/nikhil-rai-20a350337/" target="_blank">linkedin</a>
+          </div>
+        </div>
+      </header>
+      
+      <!-- Summary Section -->
+      <section class="section card">
+        <h2>Professional Summary</h2>
+        <p>
+          An enthusiastic first-year B.Tech Computer Science and Engineering student with a strong foundation in mathematics and computer science principles. Eager to learn and develop technical skills with a particular interest in programming, artificial intelligence, and data science. Seeking opportunities to gain practical experience and contribute to innovative projects.
+        </p>
+      </section>
+      
+      <!-- Education Section -->
+      <section class="section card">
+        <h2>Education</h2>
+        
+        <div class="education-item">
+          <div class="timeline">
+            <div class="timeline-dot"></div>
+            <div class="date">2024 - 2028 (Expected)</div>
+          </div>
+          <h3 class="institution">South Asian University</h3>
+          <p>Bachelor of Technology (B.Tech) in Computer Science and Engineering</p>
+          <ul>
+            <li>Selected courses: Data Structures, Algorithms, Operating Systems, Database Management</li>
+            <li>Actively participating in coding clubs and technical events</li>
+          </ul>
+        </div>
+        
+        <div class="education-item">
+          <div class="timeline">
+            <div class="timeline-dot"></div>
+            <div class="date">2022 - 2024</div>
+          </div>
+          <h3 class="institution">CBSE Board</h3>
+          <p>Higher Secondary (Class XII) - 93%</p>
+          <ul>
+            <li>Subjects: Mathematics, Physics, Chemistry, Computer Science, English</li>
+            <li>School Representative for Science Exhibitions</li>
+            <li>Participated in various inter-school coding competitions</li>
+          </ul>
+        </div>
+      </section>
+      
+      <!-- Technical Skills Section -->
+      <section class="section card">
+        <h2>Technical Skills</h2>
+        <div class="skills-container">
+          <div class="skill-category">
+            <h3>Programming Languages</h3>
+            <div class="skill-item">
+              <div class="skill-name">
+                <span>C/C++</span>
+                <span>85%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" data-width="85"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-name">
+                <span>Python</span>
+                <span>100%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" data-width="100"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-name">
+                <span>Java</span>
+                <span>80%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" data-width="80"></div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="skill-category">
+            <h3>Web Technologies</h3>
+            <div class="skill-item">
+              <div class="skill-name">
+                <span>HTML/CSS</span>
+                <span>100%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" data-width="100"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-name">
+                <span>JavaScript</span>
+                <span>80%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" data-width="80"></div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="skill-category">
+            <h3>Tools & Technologies</h3>
+            <div class="skill-item">
+              <div class="skill-name">
+                <span>Git & GitHub</span>
+                <span>100%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" data-width="100"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-name">
+                <span>Data Structures</span>
+                <span>100%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" data-width="100"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Projects Section -->
+      <section class="section card">
+        <h2>Projects</h2>
+        <div class="projects-container">
+          <div class="project-card">
+            <h3 class="project-title">Personal Portfolio Website</h3>
+            <p class="project-description">
+              Designed and developed a responsive personal website using HTML, CSS, and JavaScript to showcase skills and projects.
+            </p>
+          </div>
+          
+          <div class="project-card">
+            <h3 class="project-title">Library Management System</h3>
+            <p class="project-description">
+              Created a basic library management system in Python with features for book tracking, borrowing, and returns.
+            </p>
+          </div>
+          
+          <div class="project-card">
+            <h3 class="project-title">Weather App</h3>
+            <p class="project-description">
+              Developed a simple weather application that fetches and displays current weather data using a public API.
+            </p>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Achievements & Certifications -->
+      <section class="section card">
+        <h2>Achievements & Certifications</h2>
+        <ul>
+          <li>First Prize in Inter-School Coding Competition (2023)</li>
+          <li>Programming in Python - Online Certification by Coursera</li>
+          <li>Web Development Fundamentals - Certification by freeCodeCamp</li>
+          <li>Participated in National Mathematics Olympiad (2023)</li>
+        </ul>
+      </section>
+      
+      <!-- Languages Section -->
+      <section class="section card">
+        <h2>Languages</h2>
+        <div class="languages">
+          <div class="language-item">
+            <div class="language-circle">
+              <span>Native</span>
+            </div>
+            <div class="language-name">Hindi</div>
+          </div>
+          
+          <div class="language-item">
+            <div class="language-circle">
+              <span>Fluent</span>
+            </div>
+            <div class="language-name">English</div>
+          </div>
+          
+          <div class="language-item">
+            <div class="language-circle">
+              <span>Basic</span>
+            </div>
+            <div class="language-name">French</div>
+          </div>
+          <div class="language-item">
+            <div class="language-circle">
+              <span>Native</span>
+            </div>
+            <div class="language-name">Bengali</div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Extracurricular Activities & Interests -->
+      <section class="section card">
+        <h2>Interests & Activities</h2>
+        <div class="interests">
+          <span class="interest-tag">AI & Machine Learning</span>
+          <span class="interest-tag">Competitive Programming</span>
+          <span class="interest-tag">Web Development</span>
+          <span class="interest-tag">Blockchain Technology</span>
+          <span class="interest-tag">Open Source Contributing</span>
+          <span class="interest-tag">Photography</span>
+          <span class="interest-tag">Chess</span>
+          <span class="interest-tag">Badminton</span>
+        </div>
+      </section>
+    </div>
+  </div>
+  
+  <!-- Print Button -->
+  <button class="print-btn">
+    
+  </button>
+  
+  <script>
+    // Wait for DOM content to load
+    document.addEventListener('DOMContentLoaded', function() {
+      // Print Functionality
+      const printBtn = document.querySelector('.print-btn');
+      
+      printBtn.addEventListener('click', function() {
+        window.print();
+      });
+      
+      // Animate Elements on Scroll
+      const cards = document.querySelectorAll('.card');
+      
+      // IntersectionObserver for revealing elements on scroll
+      const observerOptions = {
+        threshold: 0.1
+      };
+      
+      const observer = new IntersectionObserver(function(entries, observer) {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+            observer.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+      
+      cards.forEach(card => {
+        observer.observe(card);
+      });
+      
+      // Animate skill bars
+      const skillBars = document.querySelectorAll('.skill-progress');
+      
+      const skillObserver = new IntersectionObserver(function(entries, observer) {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const width = entry.target.getAttribute('data-width');
+            entry.target.style.width = `${width}%`;
+            observer.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+      
+      skillBars.forEach(bar => {
+        skillObserver.observe(bar);
+      });
+    });
+  </script>
+</body>
+</html>
